@@ -1,0 +1,127 @@
+Here's an explanation of Insertion Sort, Recursion, Quick Sort, and Merge Sort:
+
+Insertion Sort
+
+Insertion Sort is a simple sorting algorithm that works by iterating through the array one element at a time, inserting each element into its proper position within the previously sorted portion.
+
+How Insertion Sort Works:
+
+1. Start with the second element (index 1).
+2. Compare the current element with the previous elements.
+3. Shift elements greater than the current element one position to the right.
+4. Insert the current element into the correct position.
+5. Repeat steps 2-4 for the remaining elements.
+
+Example:
+
+Array: [5, 2, 8, 3, 1, 6, 4]
+
+Iteration 1:
+- Current element: 2
+- Shift 5 to the right: [2, 5, 8, 3, 1, 6, 4]
+
+Iteration 2:
+- Current element: 8
+- No shift needed: [2, 5, 8, 3, 1, 6, 4]
+
+...
+
+Code:
+
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i-1
+        while j >= 0 and arr[j] > key:
+            arr[j+1] = arr[j]
+            j -= 1
+        arr[j+1] = key
+    return arr
+
+
+Time Complexity: O(n^2)
+Space Complexity: O(1)
+Stable: Yes
+
+Recursion
+
+Recursion is a programming technique where a function calls itself repeatedly until a base case is reached.
+
+Key Concepts:
+
+1. Base case: A trivial case that stops the recursion.
+2. Recursive call: The function calls itself.
+3. State: The current state of the function.
+
+Example: Factorial
+
+
+def factorial(n):
+    if n == 0:  # Base case
+        return 1
+    else:
+        return n * factorial(n-1)  # Recursive call
+
+
+Quick Sort
+
+Quick Sort is a divide-and-conquer algorithm that selects a pivot, partitions the array, and recursively sorts the subarrays.
+
+How Quick Sort Works:
+
+1. Choose a pivot element.
+2. Partition the array around the pivot.
+3. Recursively sort the left and right subarrays.
+4. Combine the sorted subarrays.
+
+Code:
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[0]
+    left = [x for x in arr[1:] if x <= pivot]
+    right = [x for x in arr[1:] if x > pivot]
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+
+Time Complexity: O(n log n) on average, O(n^2) in the worst case
+Space Complexity: O(log n)
+Stable: No
+
+Merge Sort
+
+Merge Sort is a divide-and-conquer algorithm that divides the array into smaller chunks, sorts each chunk, and merges the sorted chunks.
+
+How Merge Sort Works:
+
+1. Divide the array into two halves.
+2. Recursively sort each half.
+3. Merge the sorted halves.
+
+Code:
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    while len(left) > 0 and len(right) > 0:
+        if left[0] <= right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+    result.extend(left)
+    result.extend(right)
+    return result
+
+
+Time Complexity: O(n log n)
+Space Complexity: O(n)
+Stable: Yes
+

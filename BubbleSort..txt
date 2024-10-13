@@ -1,0 +1,100 @@
+Here's an explanation of Bubble Sort in detail, along with C++ code examples:
+
+What is Bubble Sort?
+
+Bubble Sort is a simple sorting algorithm that repeatedly iterates through the array, comparing adjacent elements and swapping them if they are in the wrong order.
+
+How Bubble Sort Works:
+
+1. Start with the first element of the array.
+2. Compare the current element with the next element.
+3. If the elements are in the wrong order, swap them.
+4. Repeat steps 2-3 until the end of the array is reached.
+5. Repeat steps 1-4 until no more swaps are needed.
+
+Example Walkthrough:
+
+Suppose we have the following array: [5, 2, 8, 3, 1, 6, 4]
+
+1. Compare 5 and 2, swap: [2, 5, 8, 3, 1, 6, 4].
+2. Compare 5 and 8, no swap.
+3. Compare 8 and 3, swap: [2, 5, 3, 8, 1, 6, 4].
+4. Compare 8 and 1, swap: [2, 5, 3, 1, 8, 6, 4].
+5. Repeat steps 1-4 until no more swaps are needed.
+
+C++ Code:
+
+#include <iostream>
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    int arr[] = {5, 2, 8, 3, 1, 6, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    std::cout << "Original array: ";
+    printArray(arr, n);
+
+    bubbleSort(arr, n);
+
+    std::cout << "Sorted array: ";
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+Time Complexity:
+
+- Best-case: O(n) (already sorted)
+- Average-case: O(n^2)
+- Worst-case: O(n^2)
+
+Space Complexity:
+
+- O(1) (in-place sorting)
+
+Advantages:
+
+- Simple to implement.
+- Stable sorting algorithm.
+
+Disadvantages:
+
+- Inefficient for large datasets.
+- Not suitable for real-time applications.
+
+Bubble Sort is not suitable for large datasets due to its quadratic time complexity. However, it can be useful for small datasets or educational purposes.
+
+Optimized Bubble Sort:
+
+To improve performance, we can add a flag to check if any swaps were made in the inner loop. If no swaps were made, the array is already sorted.
+
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        bool swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+    }
+}

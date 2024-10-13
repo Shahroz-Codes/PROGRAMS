@@ -1,0 +1,88 @@
+Here's an explanation of Selection Sort in detail, along with C++ code examples:
+
+What is Selection Sort?
+
+Selection Sort is a simple sorting algorithm that works by repeatedly finding the minimum element from the unsorted part of the array and swapping it with the first unsorted element.
+
+How Selection Sort Works:
+
+1. Start with the first element of the array.
+2. Find the minimum element in the unsorted part of the array.
+3. Swap the found minimum element with the first unsorted element.
+4. Repeat steps 2-3 until the entire array is sorted.
+
+Example Walkthrough:
+
+Suppose we have the following array: [5, 2, 8, 3, 1, 6, 4]
+
+1. Start with the first element 5.
+2. Find the minimum element in the unsorted part of the array: 1.
+3. Swap 5 and 1: [1, 2, 8, 3, 5, 6, 4].
+4. Repeat steps 2-3 for the next unsorted element 2.
+5. Find the minimum element in the unsorted part of the array: 2 (already in place).
+6. No swap needed.
+7. Repeat steps 2-3 for the next unsorted element 8.
+8. Find the minimum element in the unsorted part of the array: 3.
+9. Swap 8 and 3: [1, 2, 3, 8, 5, 6, 4].
+10. Repeat steps 2-3 until the entire array is sorted.
+
+C++ Code:
+
+#include <iostream>
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        std::swap(arr[i], arr[minIndex]);
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    int arr[] = {5, 2, 8, 3, 1, 6, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    std::cout << "Original array: ";
+    printArray(arr, n);
+
+    selectionSort(arr, n);
+
+    std::cout << "Sorted array: ";
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+Time Complexity:
+
+- Best-case: O(n^2)
+- Average-case: O(n^2)
+- Worst-case: O(n^2)
+
+Space Complexity:
+
+- O(1) (in-place sorting)
+
+Advantages:
+
+- Simple to implement.
+- Stable sorting algorithm.
+
+Disadvantages:
+
+- Inefficient for large datasets.
+- Not suitable for real-time applications.
+
+Selection Sort is not suitable for large datasets due to its quadratic time complexity. However, it can be useful for small datasets or educational purposes.
