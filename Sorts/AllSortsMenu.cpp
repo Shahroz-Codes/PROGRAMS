@@ -144,6 +144,8 @@ int main()
     // A.MergeSort(arr, 0, SIZE-1);
     // A.bubbleSort(arr,SIZE);
     // A.ShowArray(arr, SIZE);
+    A.QuickSort(arr,0,SIZE-1);
+    A.ShowArray(arr, SIZE);
 
     return 0;
 }

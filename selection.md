@@ -27,7 +27,7 @@ Suppose we have the following array: [5, 2, 8, 3, 1, 6, 4]
 10. Repeat steps 2-3 until the entire array is sorted.
 
 C++ Code:
-
+```cpp
 #include <iostream>
 
 void selectionSort(int arr[], int n) {
@@ -63,7 +63,7 @@ int main() {
 
     return 0;
 }
-
+```
 
 Time Complexity:
 

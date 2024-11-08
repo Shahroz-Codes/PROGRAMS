@@ -23,7 +23,7 @@ Suppose we have the following array: [5, 2, 8, 3, 1, 6, 4]
 5. Repeat steps 1-4 until no more swaps are needed.
 
 C++ Code:
-
+```cpp
 #include <iostream>
 
 void bubbleSort(int arr[], int n) {
@@ -57,7 +57,7 @@ int main() {
 
     return 0;
 }
-
+```
 
 Time Complexity:
 
@@ -85,7 +85,7 @@ Optimized Bubble Sort:
 
 To improve performance, we can add a flag to check if any swaps were made in the inner loop. If no swaps were made, the array is already sorted.
 
-
+```cpp
 void bubbleSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         bool swapped = false;
@@ -98,3 +98,4 @@ void bubbleSort(int arr[], int n) {
         if (!swapped) break;
     }
 }
+```

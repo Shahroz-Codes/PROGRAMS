@@ -15,26 +15,26 @@ C++ Code:
 ```cpp
 #include <iostream>
 
-void quickSort(int arr[], int low, int high) {
-    if (low < high) {
-        int pivot = partition(arr, low, high);
-        quickSort(arr, low, pivot - 1);
-        quickSort(arr, pivot + 1, high);
+void quickSort(int arr[], int left, int right) {
+    if (left < right) {
+        int pivot = partition(arr, left, right);
+        quickSort(arr, left, pivot - 1);
+        quickSort(arr, pivot + 1, right);
     }
 }
 
-int partition(int arr[], int low, int high) {
-    int pivot = arr[low];
-    int i = low + 1;
-    int j = high;
+int partition(int arr[], int left, int right) {
+    int pivot = arr[left];
+    int i = left + 1;
+    int j = right;
 
     while (i <= j) {
-        while (i <= high && arr[i] <= pivot) i++;
-        while (j >= low && arr[j] > pivot) j--;
+        while (i <= right && arr[i] <= pivot) i++;
+        while (j >= left && arr[j] > pivot) j--;
         if (i <= j) std::swap(arr[i], arr[j]);
     }
 
-    std::swap(arr[low], arr[j]);
+    std::swap(arr[left], arr[j]);
     return j;
 }
 
@@ -56,16 +56,16 @@ int main() {
 
     std::cout << "Sorted array: ";
     printArray(arr, n);
-
+  
     return 0;
 }
 ```
 
 Explanation of Code:
 
-- quickSort function takes three arguments: arr (array to sort), low (starting index), and high (ending index).
-- partition function takes three arguments: arr (array to partition), low (starting index), and high (ending index).
-- Choose a pivot element (pivot = arr[low]).
+- quickSort function takes three arguments: arr (array to sort), left (starting index), and right (ending index).
+- partition function takes three arguments: arr (array to partition), left (starting index), and right (ending index).
+- Choose a pivot element (pivot = arr[left]).
 - Partition the array around the pivot.
 - Recursively apply quickSort to the subarrays.
 
