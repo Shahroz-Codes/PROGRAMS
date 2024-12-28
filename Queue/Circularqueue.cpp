@@ -85,11 +85,14 @@ int main()
     c.Insert(2);
     c.Insert(8);
     c.Insert(99);
+    // c.Insert(99);
     // cout << "Elements after insertion:";
     c.Display();
     c.Remove();
     c.Remove();
     c.Remove();
+    c.Remove();
+    // c.Remove();
     // cout << "Elements after deletion:";
     c.Display();
 

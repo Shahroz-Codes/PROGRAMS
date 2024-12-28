@@ -73,20 +73,38 @@ public:
             temp->next = newer;
         }
     }
-
     void DeleteAtHead()
-    {
-        node *temp = head;
-        head = temp->next;
-        cout << "Deleted Value : " << temp->data << endl;
-        delete temp;
-    }
-
-    void DeleteAtEnd(int val)
     {
         if (IsEmpty())
         {
-            DeleteAtHead();
+            cout << "Empty List" << endl;
+            return;
+        }
+        else if (head->next == NULL)
+        {
+            cout << "Deleted Value : " << head->data << endl;
+            head = NULL;
+        }
+        else
+        {
+            node *temp = head;
+            head = temp->next;
+            cout << "Deleted Value : " << temp->data << endl;
+            delete temp;
+        }
+    }
+
+    void DeleteAtEnd()
+    {
+        if (IsEmpty())
+        {
+            cout << "Empty List" << endl;
+            return;
+        }
+        else if (head->next == NULL)
+        {
+            cout << "Deleted Value : " << head->data << endl;
+            head = NULL;
         }
         else
         {
@@ -147,7 +165,7 @@ public:
             }
             else
             {
-                node *temp1 = head, *temp2;
+                node *temp1, *temp2;
                 temp1 = temp->next;
                 temp2 = temp1->next;
                 temp->next = temp2;
@@ -244,12 +262,12 @@ public:
             {
                 temp1 = temp1->next;
             }
-            temp1->next=NULL;
+            temp1->next = NULL;
             delete temp;
         }
         else
         {
-             node *temp1 = head, *temp2 = temp->next;
+            node *temp1 = head, *temp2 = temp->next;
             while (temp1->next != temp)
             {
                 temp1 = temp1->next;
@@ -264,10 +282,6 @@ int main()
 {
     Linklist ll;
     ll.InsertAtHead(22);
-    ll.InsertAtHead(33);
-    ll.InsertAtHead(44);
-    ll.InsertAtHead(55);
-    ll.InsertAtHead(66);
     ll.ShowList();
 
     cout << endl;
