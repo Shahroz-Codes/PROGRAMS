@@ -5,7 +5,7 @@ using namespace std;
     {
         if (low < high)
         {
-            int pivot = Partition(arr, low, high);
+            int pivot =  Partition(arr, low, high);
             QuickSort(arr, low, pivot - 1);
             QuickSort(arr, pivot + 1, high);
         }

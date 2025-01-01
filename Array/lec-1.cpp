@@ -8,6 +8,7 @@ class MyArray
         int arr[SIZE];
         int index;
     public:
+    
         MyArray() : index(0) {}
         void Insert(int val)
         {
@@ -25,10 +26,7 @@ class MyArray
                 cout<<"value at "<<i<<" index is "<<arr[i]<<endl;
             }
         }
-        /**void SelectionSort()
-        {
 
-        }*/
         void BubbleSort()
         {
             for(int i = 0; i < index-1; i++)

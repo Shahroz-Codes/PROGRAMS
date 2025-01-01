@@ -1,1 +1,1 @@
-(front + 1) % SIZE; 
+    c.Insert(99);

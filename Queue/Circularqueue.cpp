@@ -13,25 +13,19 @@ public:
     CirculeQueue() : front(SIZE - 1), rear(SIZE - 1) {}
     bool IsEmpty()
     {
-        if (front == rear)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return front == rear;
     }
     void Insert(int val)
     {
-        if (rear == SIZE - 1)
-        {
-            rear = 0;
-        }
-        else
-        {
-            rear++;
-        }
+        // if (rear == SIZE - 1)
+        // {
+        //     rear = 0;
+        // }
+        // else
+        // {
+        //     rear++;
+        // }
+        rear = (rear + 1) % SIZE;
         if (rear == front)
         {
             cout << "Queue is Full" << endl;
@@ -48,16 +42,18 @@ public:
             cout << "Queue is Empty";
             exit(1);
         }
-        if (front ==(SIZE - 1))
-        {
-            front = 0;
-            cout << "Deleted : " << arr[front] << " | Front: " << front << " | Rear: " << rear << endl;
-        }
-        else
-        {
-            front++;
-            cout << "Deleted: " << arr[front] << " | Front: " << front << " | Rear: " << rear << endl;
-        }
+        // if (front == (SIZE - 1))
+        // {
+        //     front = 0;
+        //     cout << "Deleted : " << arr[front] << " | Front: " << front << " | Rear: " << rear << endl;
+        // }
+        // else
+        // {
+        //     front++;
+        //     cout << "Deleted: " << arr[front] << " | Front: " << front << " | Rear: " << rear << endl;
+        // }
+        front = (front + 1) % SIZE;
+        cout << "Deleted: " << arr[front] << " | Front: " << front << " | Rear: " << rear << endl;
     }
 
     void Display()
@@ -91,10 +87,10 @@ int main()
     c.Remove();
     c.Remove();
     c.Remove();
-    c.Remove();
     // c.Remove();
     // cout << "Elements after deletion:";
     c.Display();
+    c.Insert(99);
 
     return 0;
 }

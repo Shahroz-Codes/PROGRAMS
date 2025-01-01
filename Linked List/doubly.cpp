@@ -21,7 +21,6 @@ public:
     {
         return head == NULL;
     }
-
     node *SearchNode(int val)
     {
         node *temp = head;
@@ -34,7 +33,6 @@ public:
         }
         return temp;
     }
-
     void ShowList()
     {
         node *temp = head;
@@ -46,7 +44,6 @@ public:
         }
         cout << "NULL" << endl;
     }
-
     void InsertAtHead(int val)
     {
         node *newer = new node();
@@ -64,7 +61,6 @@ public:
         }
         head = newer;
     }
-
     void InsertAtEnd(int val)
     {
         if (IsEmpty())
@@ -86,7 +82,6 @@ public:
             temp->right = newer;
         }
     }
-
     void DeleteAtHead()
     {
         if (IsEmpty())
@@ -142,7 +137,6 @@ public:
             }
         }
     }
-
     void InsertAfter(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -168,7 +162,6 @@ public:
             }
         }
     }
-
     void DeleteAfter(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -200,7 +193,6 @@ public:
             }
         }
     }
-
     void InsertBefore(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -238,7 +230,6 @@ public:
             temp1->right = newer;
         }
     }
-
     void DeleteBefore(int searchval)
     {
         node *temp = SearchNode(searchval);

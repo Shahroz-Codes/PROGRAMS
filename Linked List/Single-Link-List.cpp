@@ -20,7 +20,6 @@ public:
     {
         return head == NULL;
     }
-
     node *SearchNode(int val)
     {
         node *temp = head;
@@ -33,7 +32,6 @@ public:
         }
         return temp;
     }
-
     void ShowList()
     {
         node *temp = head;
@@ -45,15 +43,21 @@ public:
         }
         cout << "NULL" << endl;
     }
-
     void InsertAtHead(int val)
     {
         node *newer = new node();
         newer->data = val;
-        newer->next = head;
+        if (head == NULL)
+        {
+            newer->next = NULL;
+        }
+        else
+        {
+            node *temp = head;
+            newer->next = temp;
+        }
         head = newer;
     }
-
     void InsertAtEnd(int val)
     {
         if (IsEmpty())
@@ -93,7 +97,6 @@ public:
             delete temp;
         }
     }
-
     void DeleteAtEnd()
     {
         if (IsEmpty())
@@ -119,7 +122,6 @@ public:
             delete temp;
         }
     }
-
     void InsertAfter(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -141,7 +143,6 @@ public:
             newer->next = temp1;
         }
     }
-
     void DeleteAfter(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -173,7 +174,6 @@ public:
             }
         }
     }
-
     void InsertBefore(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -210,7 +210,6 @@ public:
             temp1->next = newer;
         }
     }
-
     void DeleteBefore(int searchval)
     {
         node *temp = SearchNode(searchval);
@@ -281,6 +280,7 @@ public:
 int main()
 {
     Linklist ll;
+    ll.InsertAtHead(33);
     ll.InsertAtHead(22);
     ll.ShowList();
 

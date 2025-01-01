@@ -13,7 +13,7 @@ How Insertion Sort Works:
 5. Repeat steps 2-4 for the remaining elements.
 
 Example:
-
+```cpp
 Array: [5, 2, 8, 3, 1, 6, 4]
 
 Iteration 1:
@@ -37,7 +37,7 @@ def insertion_sort(arr):
             j -= 1
         arr[j+1] = key
     return arr
-
+```
 
 Time Complexity: O(n^2)
 Space Complexity: O(1)
@@ -75,7 +75,7 @@ How Quick Sort Works:
 4. Combine the sorted subarrays.
 
 Code:
-
+```cpp
 def quick_sort(arr):
     if len(arr) <= 1:
         return arr
@@ -83,7 +83,7 @@ def quick_sort(arr):
     left = [x for x in arr[1:] if x <= pivot]
     right = [x for x in arr[1:] if x > pivot]
     return quick_sort(left) + [pivot] + quick_sort(right)
-
+```
 
 Time Complexity: O(n log n) on average, O(n^2) in the worst case
 Space Complexity: O(log n)
