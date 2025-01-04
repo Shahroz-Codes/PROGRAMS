@@ -20,7 +20,7 @@ public:
     {
         return head == NULL;
     }
-    node *SearchNode(int val)
+    node *Searchnode(int val)
     {
         node *temp = head;
 
@@ -124,7 +124,7 @@ public:
     }
     void InsertAfter(int searchval)
     {
-        node *temp = SearchNode(searchval);
+        node *temp = Searchnode(searchval);
 
         if (temp == NULL)
         {
@@ -145,7 +145,7 @@ public:
     }
     void DeleteAfter(int searchval)
     {
-        node *temp = SearchNode(searchval);
+        node *temp = Searchnode(searchval);
 
         if (temp == NULL)
         {
@@ -153,7 +153,7 @@ public:
         }
         else if (temp->next == NULL)
         {
-            cout << "Could not Delete After Last Node " << endl;
+            cout << "Could not Delete After Last node " << endl;
         }
         else
         {
@@ -176,7 +176,7 @@ public:
     }
     void InsertBefore(int searchval)
     {
-        node *temp = SearchNode(searchval);
+        node *temp = Searchnode(searchval);
 
         if (temp == NULL)
         {
@@ -212,7 +212,7 @@ public:
     }
     void DeleteBefore(int searchval)
     {
-        node *temp = SearchNode(searchval);
+        node *temp = Searchnode(searchval);
 
         if (temp == NULL)
         {
@@ -220,7 +220,7 @@ public:
         }
         else if (temp == head)
         {
-            cout << "Could not Delete Before Head Node " << endl;
+            cout << "Could not Delete Before Head node " << endl;
         }
         else if (temp->next == temp)
         {
@@ -240,9 +240,9 @@ public:
             delete temp1;
         }
     }
-    void DeleteParticularNode(int searchval)
+    void DeleteParticularnode(int searchval)
     {
-        node *temp = SearchNode(searchval);
+        node *temp = Searchnode(searchval);
 
         if (temp == NULL)
         {
@@ -275,14 +275,43 @@ public:
             delete temp;
         }
     }
+    void reverseLinkedList()
+    {
+        // Initialize pointers for the reversal process
+        node *currentnode = head;
+        node *previousnode = nullptr;
+        node *nextnode = nullptr;
+
+        // Traverse the linked list and reverse the node pointers
+        while (currentnode != nullptr)
+        {
+            // Store the next node before reversing the link
+            nextnode = currentnode->next;
+
+            // Reverse the link of the current node
+            currentnode->next = previousnode;
+
+            // Move the pointers one step forward
+            previousnode = currentnode;
+            currentnode = nextnode;
+        }
+
+        // Update the head pointer to the new first node
+        head = previousnode;
+    }
 };
 
 int main()
 {
     Linklist ll;
     ll.InsertAtHead(33);
+    ll.InsertAtHead(34);
+    ll.InsertAtHead(36);
     ll.InsertAtHead(22);
     ll.ShowList();
+
+    // ll.reverseLinkedList();
+    // ll.ShowList();
 
     cout << endl;
 
@@ -301,7 +330,7 @@ int main()
     // ll.DeleteAfter(55);
     // ll.ShowList();
 
-    // ll.DeleteParticularNode(55);
+    // ll.DeleteParticularnode(55);
     // ll.ShowList();
     return 0;
 }

@@ -61,6 +61,10 @@ public:
             cout << val << " inserted at left of " << tracer->data << endl;
         }
     }
+    node* SearchBST(int val){
+    }
+    void Delete(int val){}
+    void Traverse(){};
 };
 
 int main()

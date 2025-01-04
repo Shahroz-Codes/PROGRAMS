@@ -1,286 +1,266 @@
 #include <iostream>
 using namespace std;
 
-class node
+class Node
 {
 public:
     int data;
-    node *next;
+    Node *next;
 };
 
-class Linklist
+class CircularLinkedList
 {
 private:
-    node *last;
+    Node *last;
 
 public:
-    Linklist() : last(NULL) {};
+    CircularLinkedList() : last(NULL) {};
 
     bool IsEmpty()
     {
         return last == NULL;
     }
 
-    node *SearchNode(int val)
+    Node *SearchNode(int val)
     {
-        node *temp = last;
-
-        while (temp != NULL)
+        Node *temp = last;
+        if (temp == NULL)
+            return NULL;
+        do
         {
             if (temp->data == val)
                 break;
             temp = temp->next;
-        }
+        } while (temp != last);
         return temp;
     }
 
     void ShowList()
     {
-        node *temp = last;
-        cout << "Link-List : ";
-        while (temp->next != NULL)
+        Node *temp = last;
+        if (temp == NULL)
+        {
+            cout << "List is empty." << endl;
+            return;
+        }
+        do
         {
             cout << temp->data << " --> ";
             temp = temp->next;
-        }
-        cout << "NULL" << endl;
+        } while (temp != last);
+        cout << "Last" << endl;
     }
 
     void insert(int val)
     {
-        node *newer = new node();
+        Node *newer = new Node();
         newer->data = val;
-        newer->next = last;
-        last = newer;
+        if (last == NULL)
+        {
+            last = newer;
+            newer->next = last;
+        }
+        else
+        {
+            newer->next = last->next;
+            last->next = newer;
+            last = newer;
+        }
     }
 
     void InsertAtEnd(int val)
     {
-        if (IsEmpty())
+        Node *newer = new Node();
+        newer->data = val;
+        if (last == NULL)
         {
-            insert(val);
+            last = newer;
+            newer->next = last;
         }
         else
         {
-            node *temp = last;
-            if (temp->next == NULL)
-            {
-                DeleteAtlast();
-            }
-            else
-            {
-                while (temp->next != NULL)
-                {
-                    temp = temp->next;
-                }
-                node *newer = new node();
-                newer->data = val;
-                newer->next = NULL;
-                temp->next = newer;
-            }
+            newer->next = last->next;
+            last->next = newer;
+            last = newer;
         }
     }
 
-    void DeleteAtlast()
+    void DeleteAtLast()
     {
-        if (IsEmpty())
+        if (last == NULL)
         {
-            cout << "Empty List" << endl;
+            cout << "List is empty." << endl;
             return;
         }
-        else if (last->next == NULL)
+        else if (last->next == last)
         {
             cout << "Deleted Value : " << last->data << endl;
+            delete last;
             last = NULL;
         }
         else
         {
-            node *temp = last;
-            last = temp->next;
-            cout << "Deleted Value : " << temp->data << endl;
-            delete temp;
+            Node *temp = last->next;
+            while (temp->next != last)
+                temp = temp->next;
+            cout << "Deleted Value : " << last->data << endl;
+            temp->next = last->next;
+            delete last;
+            last = temp;
         }
     }
 
     void DeleteAtEnd()
     {
-        if (IsEmpty())
+        if (last == NULL)
         {
-            cout << "Empty List" << endl;
+            cout << "List is empty." << endl;
             return;
         }
-        else if (last->next == NULL)
+        else if (last->next == last)
         {
             cout << "Deleted Value : " << last->data << endl;
+            delete last;
             last = NULL;
         }
         else
         {
-            node *temp = last, *temp1;
-            while (temp->next != NULL)
-            {
-                temp1 = temp;
+            Node *temp = last->next;
+            while (temp->next != last)
                 temp = temp->next;
-            }
-            temp1->next = NULL;
             cout << "Deleted Value : " << temp->data << endl;
+            temp->next = last->next;
             delete temp;
         }
     }
 
     void InsertAfter(int searchval)
     {
-        node *temp = SearchNode(searchval);
-
+        Node *temp = SearchNode(searchval);
         if (temp == NULL)
         {
             cout << "Could not find node " << endl;
+            return;
+        }
+        Node *newer = new Node();
+        cout << "Enter a new value : ";
+        cin >> newer->data;
+        cout << endl;
+        if (temp == last)
+        {
+            newer->next = temp->next;
+            temp->next = newer;
+            last = newer;
         }
         else
         {
-            node *temp1 = temp->next;
-            node *newer = new node();
-
-            cout << "Enter a new value : ";
-            cin >> newer->data;
-            cout << endl;
-
+            newer->next = temp->next;
             temp->next = newer;
-            newer->next = temp1;
         }
     }
 
     void DeleteAfter(int searchval)
     {
-        node *temp = SearchNode(searchval);
-
+        Node *temp = SearchNode(searchval);
         if (temp == NULL)
         {
             cout << "Could not find node " << endl;
+            return;
         }
-        else if (temp->next == NULL)
+        if (temp->next == last)
         {
             cout << "Could not Delete After Last Node " << endl;
+            return;
         }
-        else
-        {
-            node *last;
-            last = temp->next;
-            if (last->next == NULL)
-            {
-                temp->next = NULL;
-                delete last;
-            }
-            else
-            {
-                node *temp1 , *temp2;
-                temp1 = temp->next;
-                temp2 = temp1->next;
-                temp->next = temp2;
-                delete temp1;
-            }
-        }
+        Node *temp1 = temp->next;
+        temp->next = temp1->next;
+        delete temp1;
     }
 
     void InsertBefore(int searchval)
     {
-        node *temp = SearchNode(searchval);
-
+        Node *temp = SearchNode(searchval);
         if (temp == NULL)
         {
             cout << "Could not find node " << endl;
+            return;
         }
-        else if (temp == last)
+        if (temp == last->next)
         {
-            node *newer = new node();
-
+            Node *newer = new Node();
             cout << "Enter a new value : ";
             cin >> newer->data;
             cout << endl;
-
-            newer->next = temp;
+            newer->next = last->next;
+            last->next = newer;
             last = newer;
         }
-        else // if (temp->next == NULL)
+        else
         {
-            node *temp1 = last;
+            Node *temp1 = last->next;
             while (temp1->next != temp)
-            {
                 temp1 = temp1->next;
-            }
-            node *newer = new node();
-
+            Node *newer = new Node();
             cout << "Enter a new value : ";
             cin >> newer->data;
             cout << endl;
 
-            newer->next = temp;
+            newer->next = temp1->next;
             temp1->next = newer;
         }
     }
 
     void DeleteBefore(int searchval)
     {
-        node *temp = SearchNode(searchval);
-
+        Node *temp = SearchNode(searchval);
         if (temp == NULL)
         {
             cout << "Could not find node " << endl;
+            return;
         }
-        else if (temp == last)
+        if (temp == last->next)
         {
-            cout << "Could not Delete Before last Node " << endl;
+            cout << "Could not Delete Before First Node " << endl;
+            return;
         }
-        else if (temp->next == temp)
-        {
-            node *temp1 = last;
-            last = temp;
-            delete temp1;
-        }
-        else
-        {
-            node *temp1 = last, *temp2;
-            while (temp1->next != temp)
-            {
-                temp2 = temp1;
-                temp1 = temp1->next;
-            }
-            temp2->next = temp;
-            delete temp1;
-        }
+        Node *temp1 = last->next;
+        while (temp1->next != temp)
+            temp1 = temp1->next;
+        temp1->next = temp->next;
+        delete temp;
     }
+
     void DeleteParticularNode(int searchval)
     {
-        node *temp = SearchNode(searchval);
-
+        Node *temp = SearchNode(searchval);
         if (temp == NULL)
         {
             cout << "Could not find node " << endl;
+            return;
+        }
+        if (temp == last && temp->next == last)
+        {
+            cout << "Deleted Value : " << temp->data << endl;
+            delete temp;
+            last = NULL;
         }
         else if (temp == last)
         {
-            node *temp1 = last->next;
-            last = temp1;
-            delete temp;
-        }
-        else if (temp->next == NULL)
-        {
-            node *temp1 = last;
-            while (temp1->next != temp)
-            {
+            Node *temp1 = last->next;
+            while (temp1->next != last)
                 temp1 = temp1->next;
-            }
-            temp1->next = NULL;
-            delete temp;
+            cout << "Deleted Value : " << last->data << endl;
+            temp1->next = last->next;
+            delete last;
+            last = temp1;
         }
         else
         {
-            node *temp1 = last, *temp2 = temp->next;
+            Node *temp1 = last->next;
             while (temp1->next != temp)
-            {
                 temp1 = temp1->next;
-            }
-            temp1->next = temp2;
+            cout << "Deleted Value : " << temp->data << endl;
+            temp1->next = temp->next;
             delete temp;
         }
     }
@@ -288,28 +268,12 @@ public:
 
 int main()
 {
-    Linklist ll;
-    ll.insert(22);
-    ll.ShowList();
-
-    cout << endl;
-
-    // ll.InsertAtEnd(77);
-    // ll.ShowList();
-
-    // ll.InsertAfter(22);
-    // ll.ShowList();
-
-    // ll.InsertBefore(44);
-    // ll.ShowList();
-
-    // ll.DeleteBefore(22);
-    // ll.ShowList();
-
-    // ll.DeleteAfter(55);
-    // ll.ShowList();
-
-    // ll.DeleteParticularNode(55);
-    // ll.ShowList();
+    CircularLinkedList cll;
+    cll.insert(22);
+    cll.insert(33);
+    cll.insert(44);
+    cll.ShowList();
+    cll.DeleteParticularNode(33);
+    cll.ShowList();
     return 0;
 }
