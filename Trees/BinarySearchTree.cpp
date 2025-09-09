@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 class node
@@ -61,23 +62,77 @@ public:
             cout << val << " inserted at left of " << tracer->data << endl;
         }
     }
-    node* SearchBST(int val){
+
+    node *getroot()
+    {
+        return root;
     }
-    void Delete(int val){}
-    void Traverse(){};
+    node *SearchBST(node *temp, int val)
+    {
+        if (temp == NULL)
+            return NULL;
+        if (val == temp->data)
+        {
+            return NULL;
+        };
+        SearchBST(temp->left, val);
+        SearchBST(temp->right, val);
+        return temp;
+    }
+    int NumberofNodes(node *temp)
+    {
+        if (temp == NULL)
+            return 0;
+        int count = 1;
+        count += NumberofNodes(temp->left);
+        count += NumberofNodes(temp->right);
+        return count;
+    }
+    int NumberofLeafNodes(node *temp)
+    {
+        int count = 0;
+        if (temp == NULL)
+            return 0;
+        if (temp->left == NULL && temp->right == NULL )
+        {
+            return 1;
+        }
+        return NumberofLeafNodes(temp->left) + NumberofLeafNodes(temp->right);
+    }
+    int SumofNodes(node *temp)
+    {
+        if (temp == NULL)
+            return 0;
+        int sum = temp->data;
+        sum += SumofNodes(temp->left);
+        sum += SumofNodes(temp->right);
+        return sum;
+    }
+
+    void Delete(int val) {}
 };
 
 int main()
 {
     BinarySearchTree bb;
+    bb.insert(20);
+    bb.insert(12);
     bb.insert(14);
-    bb.insert(16);
-    bb.insert(16);
-    bb.insert(18);
-    bb.insert(5);
-    bb.insert(9);
-    bb.insert(7);
-    bb.insert(15);
+    bb.insert(8);
+    bb.insert(30);
+  
+
+    // cout << "NumberofNodes: " << bb.NumberofNodes(bb.getroot()) << endl;
+    // cout << "SumofNodes: " << bb.SumofNodes(bb.getroot()) << endl;
+    // if (bb.SearchBST(bb.getroot(), 60) == NULL)
+    // {
+    //     cout << "value not found " << endl;
+    // }
+    // else
+    // {
+    //     cout << "value  found " << endl;
+    // }
+    cout << "NumberofLeafNodes: " << bb.NumberofLeafNodes(bb.getroot()) << endl;
 
     return 0;
 }

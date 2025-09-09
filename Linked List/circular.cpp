@@ -37,7 +37,7 @@ public:
 
     void ShowList()
     {
-        Node *temp = last;
+        Node *temp = last->next;
         if (temp == NULL)
         {
             cout << "List is empty." << endl;
@@ -47,7 +47,7 @@ public:
         {
             cout << temp->data << " --> ";
             temp = temp->next;
-        } while (temp != last);
+        } while (temp != last->next);
         cout << "Last" << endl;
     }
 
@@ -249,10 +249,11 @@ public:
             Node *temp1 = last->next;
             while (temp1->next != last)
                 temp1 = temp1->next;
+            Node *todelete = temp1->next;
             cout << "Deleted Value : " << last->data << endl;
             temp1->next = last->next;
-            delete last;
             last = temp1;
+            delete todelete;
         }
         else
         {

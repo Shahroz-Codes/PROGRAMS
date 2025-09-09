@@ -1,1 +1,1 @@
-    c.Insert(99);
+        cout << "Deleted: " << arr[front] << " | Front: " << front << " | Rear: " << rear << endl;
